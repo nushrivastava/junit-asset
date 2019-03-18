@@ -1,0 +1,13 @@
+{
+	"applicationId": 2,
+	"isRejected": "false",
+	"note": "New",
+	"round": "0",
+	"job": {
+		"jobId": 2,
+		"description": "Test job detail 2",
+		"skillsRequired": "Hybris",
+		"designation": "BTA",
+		"yearsOfExperience": 1
+	}
+}

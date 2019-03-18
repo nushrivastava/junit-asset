@@ -1,0 +1,8 @@
+{
+	"interviewerId" : 1,
+	"firstName": "Rohit",
+	"lastName": "Shetty",
+	"designation": "Consultant",
+	"skill": "Spring Boot",
+	"yearsOfExperience": 8
+}

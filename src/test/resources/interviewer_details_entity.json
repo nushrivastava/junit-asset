@@ -1,0 +1,10 @@
+
+{
+	"applicantId": 1,
+	"firstName": "Rohit",
+	"lastName": "Shetty",
+	"email": "abc@gmail.com",
+	"phoneNumber": "99977888220",
+	"skill": "Spring Boot",
+	"yearsOfExperience": 8
+}
