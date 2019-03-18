@@ -14,7 +14,7 @@ import com.deloitte.employee.recruitment.system.common.TestCommon;
 import com.google.gson.JsonObject;
 
 //@RunWith(JMock.class)O
-public class RecruiterControllerTestWithJMockit extends TestCommon {
+public class TestRecruiterControllerWithJMockit extends TestCommon {
 
 //	Mockery context = new Mockery();
 //	@Injectable

@@ -30,7 +30,7 @@ import com.deloitte.employee.recruitment.system.service.RecruiterServiceImpl;
 import com.google.gson.JsonObject;
 
 @RunWith(PowerMockRunner.class)
-public class RecruiterControllerTestWithPowerMockito extends TestCommon {
+public class TestRecruiterControllerWithPowerMockito extends TestCommon {
 
 	@Mock
 	private ApplicantService applicantService;

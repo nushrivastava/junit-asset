@@ -44,7 +44,7 @@ import com.deloitte.employee.recruitment.system.repository.RecruiterRepository;
  *
  */
 @RunWith(MockitoJUnitRunner.class)
-public class RecruiterServiceImplTestWithMokito extends TestCommon {
+public class TestRecruiterServiceImplWithMokito extends TestCommon {
 
 	@InjectMocks
 	private RecruiterServiceImpl recruiterServiceImpl;
