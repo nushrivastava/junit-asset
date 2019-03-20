@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.deloitte.employee.recruitment.system.common.TestCommon;
 import com.google.gson.JsonObject;
 
-//@RunWith(JMock.class)O
+//@RunWith(JMock.class)
 public class TestRecruiterControllerWithJMockit extends TestCommon {
 
 //	Mockery context = new Mockery();
@@ -43,7 +43,7 @@ public class TestRecruiterControllerWithJMockit extends TestCommon {
 	 * 
 	 * @throws Exception
 	 */
-	@Test
+//	@Test
 	public void testSaveInterviewer_Success() throws Exception {
 		// set up
 		/*final RecruiterServiceImpl recruiterService =  context.mock(RecruiterServiceImpl.class);
@@ -79,7 +79,7 @@ public class TestRecruiterControllerWithJMockit extends TestCommon {
 	 * 
 	 * @throws Exception
 	 */
-	@Test
+//	@Test
 	public void testSaveInterviewer_Failure_BadRequest_IncorrectSkill() throws Exception {
 		// set up
 		JsonObject request = readJsonFile(SAVE_INTERVIEWER_BAD_REQUEST);
@@ -95,7 +95,7 @@ public class TestRecruiterControllerWithJMockit extends TestCommon {
 	 * 
 	 * @throws Exception
 	 */
-	@Test
+//	@Test
 	public void testSaveInterviewer_Failure_BadRequest_MissingParameter() throws Exception {
 		// set up
 		JsonObject request = readJsonFile(SAVE_INTERVIEWER_BAD_REQUEST);

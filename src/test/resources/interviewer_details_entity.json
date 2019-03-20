@@ -1,6 +1,6 @@
 
 {
-	"applicantId": 1,
+	"interviewerId": 1,
 	"firstName": "Rohit",
 	"lastName": "Shetty",
 	"email": "abc@gmail.com",

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.deloitte.employee.recruitment.system.common.SystemUtil;
 import com.deloitte.employee.recruitment.system.exception.ServiceException;
 import com.deloitte.employee.recruitment.system.model.AddApplicantRequest;
 import com.deloitte.employee.recruitment.system.model.ApplicantDetailsEntity;
@@ -154,16 +155,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 				throw new IllegalArgumentException("Job requires more experienced candidate for this position");
 			}
 
-			ApplicationDetailsEntity application = new ApplicationDetailsEntity();
-			application.setNote("New");
-			application.setIsRejected(false);
-			application.setRound(0);
-			application.setJob(job);
-			application.setApplicationId(applicantId);
-			application.setApplicantDetails(applicant);
+			ApplicationDetailsEntity application = SystemUtil.generateApplication(applicant, job);
 			applications.add(application);
 			applicant.setApplicationDetails(applications);
-
+			
 			ApplicantDetailsEntity savedApplicant = applicantRepo.save(applicant);
 			List<ApplicationDetailsEntity> savedApplications = savedApplicant.getApplicationDetails();
 			ApplicantDetailsResponse response = dozerMapper.map(savedApplicant, ApplicantDetailsResponse.class);
@@ -175,8 +170,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		} catch (Exception e) {
 			if (e instanceof IllegalArgumentException)
 				throw e;
-			throw new ServiceException(String.format("Erro applying applicant %s for job: %s", jobId, applicantId), e);
+			throw new ServiceException(String.format("Error applying applicant %s for job: %s", jobId, applicantId), e);
 		}
 	}
-
 }
