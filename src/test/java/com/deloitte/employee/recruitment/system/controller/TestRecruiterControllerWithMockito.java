@@ -100,7 +100,6 @@ public class TestRecruiterControllerWithMockito extends TestCommon {
 		// execute
 		MockHttpServletResponse response = mockMvc.perform(
 				post("/recruiter/interviewer").contentType(MediaType.APPLICATION_JSON).content(request.toString())).andReturn().getResponse();
-//		.andExpect(status().isBadRequest());
 		assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatus());
 	}
 

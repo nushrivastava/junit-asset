@@ -8,18 +8,25 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.Arrays;
+import java.util.Collection;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.dozer.DozerBeanMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.junit4.PowerMockRunnerDelegate;
 
 import com.deloitte.employee.recruitment.system.common.SystemUtil;
 import com.deloitte.employee.recruitment.system.common.TestCommon;
@@ -38,7 +45,8 @@ import com.deloitte.employee.recruitment.system.repository.JobRepository;
  *
  */
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(SystemUtil.class)
+@PowerMockRunnerDelegate(Parameterized.class)
+@PrepareForTest({SystemUtil.class})
 public class TestApplicantServiceImplWithPowerMockito extends TestCommon{
 	
 	@InjectMocks
@@ -58,6 +66,20 @@ public class TestApplicantServiceImplWithPowerMockito extends TestCommon{
 	
 	@Captor
 	private ArgumentCaptor<ApplicantDetailsEntity> applicantApplyJobArgumentCaptor;
+
+	@Parameterized.Parameters
+	public static Collection<Object[]> data() {
+		return Arrays.asList(new Object[][] { { new JobDetailsEntity(3, "Sample Job 3", "JAVA", "Consultant", 6) },
+			{ new JobDetailsEntity(4, "Sample Job 4", "JAVA", "Manager", 12) } });
+	}
+
+	@Parameterized.Parameter(value = 0)
+	public JobDetailsEntity job;
+	
+	@Before
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
 	/**
 	 * Tests applyJob success scenario.
@@ -106,7 +128,6 @@ public class TestApplicantServiceImplWithPowerMockito extends TestCommon{
 	public void test_applyJob_Failure_IllegalArgumentException() throws Exception {
 		// setup
 		ApplicantDetailsEntity applicantEntity = buildApplicantEntity();
-		JobDetailsEntity job = buildJobDetailsEntity().get(0);
 		applicantEntity.setYearsOfExperience(job.getYearsOfExperience() - 2);
 
 		when(applicantRepo.findByApplicantId(any(Integer.class))).thenReturn(applicantEntity);
@@ -129,7 +150,6 @@ public class TestApplicantServiceImplWithPowerMockito extends TestCommon{
 	public void test_applyJob_Failure_ServiceException() throws Exception {
 		// setup
 		ApplicantDetailsEntity applicantEntity = buildApplicantEntity();
-		JobDetailsEntity job = buildJobDetailsEntity().get(0);
 		applicantEntity.setYearsOfExperience(job.getYearsOfExperience() - 2);
 
 		when(applicantRepo.findByApplicantId(any(Integer.class))).thenReturn(applicantEntity);

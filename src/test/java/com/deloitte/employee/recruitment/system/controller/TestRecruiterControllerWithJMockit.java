@@ -5,17 +5,28 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.jmock.Expectations;
+import org.jmock.integration.junit4.JUnitRuleMockery;
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.Rule;
+import org.mockito.Mock;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.deloitte.employee.recruitment.system.common.TestCommon;
+import com.deloitte.employee.recruitment.system.service.ApplicantService;
+import com.deloitte.employee.recruitment.system.service.RecruiterServiceImpl;
 import com.google.gson.JsonObject;
 
 //@RunWith(JMock.class)
 public class TestRecruiterControllerWithJMockit extends TestCommon {
 
+	@Rule
+    public final JUnitRuleMockery context = new JUnitRuleMockery();
+
+    @Mock
+    private ApplicantService applicantService;
+    
 //	Mockery context = new Mockery();
 //	@Injectable
 //	private ApplicantService applicantService;
@@ -46,14 +57,14 @@ public class TestRecruiterControllerWithJMockit extends TestCommon {
 //	@Test
 	public void testSaveInterviewer_Success() throws Exception {
 		// set up
-		/*final RecruiterServiceImpl recruiterService =  context.mock(RecruiterServiceImpl.class);
+		final RecruiterServiceImpl recruiterService =  context.mock(RecruiterServiceImpl.class);
 		RecruiterController recruiterController = new RecruiterController();
 		context.checking(new Expectations() {
 			{
 				oneOf (recruiterService).addOrUpdateInterviewer(buildAddInterviewerRequest());
 				will(returnValue(buildInterviewerDetailsResponse()));
 			}
-		});*/
+		});
 		// execute
 //		MockHttpServletResponse response = mockMvc.perform(
 //				post("/recruiter/interviewer").contentType(MediaType.APPLICATION_JSON).content(request.toString()))

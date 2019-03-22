@@ -34,6 +34,19 @@ public class JobDetailsEntity implements Serializable {
 	@Column(name = "YEARS_OF_EXPERIENCE", nullable = true)
 	private Integer yearsOfExperience;
 
+	
+	public JobDetailsEntity() {}
+
+	public JobDetailsEntity(Integer jobId, String description, String skillsRequired, String designation,
+			Integer yearsOfExperience) {
+		super();
+		this.jobId = jobId;
+		this.description = description;
+		this.skillsRequired = skillsRequired;
+		this.designation = designation;
+		this.yearsOfExperience = yearsOfExperience;
+	}
+
 	@OneToOne(mappedBy = "job")
 	public Integer getJobId() {
 		return jobId;
