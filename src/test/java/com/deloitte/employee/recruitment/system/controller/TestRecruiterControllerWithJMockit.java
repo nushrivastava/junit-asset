@@ -7,25 +7,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import org.jmock.Expectations;
 import org.jmock.integration.junit4.JUnitRuleMockery;
+import org.jmock.lib.legacy.ClassImposteriser;
 import org.junit.Before;
 import org.junit.Rule;
-import org.mockito.Mock;
+import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.deloitte.employee.recruitment.system.common.TestCommon;
 import com.deloitte.employee.recruitment.system.service.ApplicantService;
+import com.deloitte.employee.recruitment.system.service.RecruiterService;
 import com.deloitte.employee.recruitment.system.service.RecruiterServiceImpl;
 import com.google.gson.JsonObject;
 
 //@RunWith(JMock.class)
 public class TestRecruiterControllerWithJMockit extends TestCommon {
 
+	
+//    public JUnit4Mockery context = new JUnit4Mockery();
 	@Rule
-    public final JUnitRuleMockery context = new JUnitRuleMockery();
+	public JUnitRuleMockery context = new JUnitRuleMockery() {
+		{
+			setImposteriser(ClassImposteriser.INSTANCE);
+		}
+	};
 
-    @Mock
+//    @Mock
     private ApplicantService applicantService;
+    
+//    @Mock
+    private RecruiterService recruiterService;
     
 //	Mockery context = new Mockery();
 //	@Injectable
@@ -44,6 +55,14 @@ public class TestRecruiterControllerWithJMockit extends TestCommon {
 	
 	@Before
 	public void setup() {
+		recruiterService =  context.mock(RecruiterService.class);
+		applicantService =  context.mock(ApplicantService.class);
+		
+//		BeanFactory beanFactory = new DefaultListableBeanFactory();
+//		recruiterService = (RecruiterService) beanFactory.getBean("recruiterService");
+//	    Dependency dep = recruiterService.getDependency();
+		
+		
 //		mockMvc = MockMvcBuilders.standaloneSetup(recruiterController).build();
 //		recruiterController.add(recruiterService);
 //		recruiterController = new RecruiterController();
@@ -57,12 +76,14 @@ public class TestRecruiterControllerWithJMockit extends TestCommon {
 //	@Test
 	public void testSaveInterviewer_Success() throws Exception {
 		// set up
-		final RecruiterServiceImpl recruiterService =  context.mock(RecruiterServiceImpl.class);
+//		recruiterService =  context.mock(RecruiterService.class);
+		
 		RecruiterController recruiterController = new RecruiterController();
+//		recruiterController.add((RecruiterService) recruiterService.proxy());
 		context.checking(new Expectations() {
 			{
 				oneOf (recruiterService).addOrUpdateInterviewer(buildAddInterviewerRequest());
-				will(returnValue(buildInterviewerDetailsResponse()));
+//				will(returnValue(buildInterviewerDetailsResponse()));
 			}
 		});
 		// execute
@@ -71,10 +92,10 @@ public class TestRecruiterControllerWithJMockit extends TestCommon {
 //				.andReturn().getResponse();
 //		
 //		mockMvc.perform(post("/recruiter/interviewer")).andExpect(status().isOk());
-		/*recruiterController.saveInterviewer(buildAddInterviewerRequest());
+		recruiterController.saveInterviewer(buildAddInterviewerRequest());
 		
 		//verify
-		context.assertIsSatisfied();*/
+		context.assertIsSatisfied();
 		/*new Verifications() {
 			{
 				recruiterService.addOrUpdateInterviewer(any(AddInterviewerRequest.class));
